@@ -1,0 +1,21 @@
+bool entrada() { 
+return expressao() && tk(EOF);
+ }
+ bool expressao() {
+ return termo() && resto_expressao(); 
+}
+ bool termo() { 
+return tk(IDENT) || parenteses_exp();
+ } 
+bool parenteses_exp() { 
+return tk('(') && expressao() && tk(')'); 
+}
+ bool resto_expressao() { 
+return (operador() && expressao() ) || true;
+} bool operador() 
+{ return tk('+') || tk('-') || tk('*') || tk('/'); 
+}
+ bool tk(Token tt) { 
+if(tokenAtual!=tt) return false; 
+getNextToken(); 
+return true; 
